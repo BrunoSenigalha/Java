@@ -58,13 +58,10 @@ public class Order {
         items.remove(item);
     }
     public Double total(){
-        double sum = 0;
 
-        for (OrderItem item: items) {
-            sum += item.subTotal();
-        }
-        return sum;
+        return items.stream().mapToDouble(OrderItem::subTotal).sum();
     }
+    @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Order moment: " + fmt.format(moment) + "\n");
